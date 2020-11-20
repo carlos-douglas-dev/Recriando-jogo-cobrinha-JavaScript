@@ -54,21 +54,23 @@ function iniciarJogo(){
 
   //criar as coordenadas que ela pode ir
   if(direction == "right") snakeX += box;
-  if(direction == "left") snakeY -= box;
+  if(direction == "left") snakeX -= box;
   if(direction == "up") snakeY -= box;
   if(direction == "down") snakeY += box;
 
-  //retira o ultimo elemento do nosso Array
-  snake.pop();
-
+  if(snakeX != food.x || snakeY != food.y){
+    //retira o ultimo elemento do nosso Array
+    snake.pop();
+  }else{
+    food.x = Math.floor(Math.random() * 15 + 1) * box;
+    food.y = Math.floor(Math.random() * 15 + 1) * box;
+  }
   //acrescenta 
   let newHead = {
     x: snakeX,
     y: snakeY
   }
-
   snake.unshift(newHead);
-
 }
 //setInterval: atualiza a tela em um determinado intervalo de tempo
 let jogo = setInterval(iniciarJogo, 100);
